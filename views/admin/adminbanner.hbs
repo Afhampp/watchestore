@@ -1,0 +1,27 @@
+
+
+ <main id="main" class="main">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">image</th>
+      <th scope="col">heading</th>
+      <th scope="col">edit</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each getbanner}}
+    <tr>
+      <th >{{inc @index}}</th>
+      <td><img src="/images/uploads/{{images}}" alt="..." style="width: 71px;height: 74px;">
+      <td>{{heading}}</td>
+
+      <td><a href="/admin/geteditbanner?id={{_id}}" style="text-decoration: none;"><button type="button" class="btn btn-success">edit</button></a></td>
+     
+    </tr>
+   {{/each}}
+  </tbody>
+</table>
+<a href="/admin/getaddbanner">add</a>
+</main>

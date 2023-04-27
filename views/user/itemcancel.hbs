@@ -1,0 +1,54 @@
+<div class="container">
+<table class="table table-bordered">
+ <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Productname</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">price</th>
+        <th scope="col">cancel</th>
+        <th scope="col">status</th>
+     </tr>
+  </thead>
+  <tbody>
+    {{#each x}}
+    {{#if productinfo.cancelitem}}
+    <tr>
+        <th >{{@index}}</th>
+        <td>{{productinfo.name}}</td>
+        <td>{{productinfo.quantitypro}}</td>
+        <td>{{productinfo.tprice}}</td>
+        <td></td>
+        <td>cancelled</td>
+        
+    </tr>
+    {{else}}
+     <tr>
+        <th >{{@index}}</th>
+        <td>{{productinfo.name}}</td>
+        <td>{{productinfo.quantitypro}}</td>
+        <td>{{productinfo.tprice}}</td>
+        {{#if is_complete}}
+        {{#if can_return}}
+        <td></td>
+        <td>Request pending</td>
+        {{else}}
+        <td></td>
+        <td>delivered</td>
+        {{/if}}
+        {{else}}
+        {{#if shipping}}
+        <td><a href="/cancelitempro?id={{productinfo.id}}" style="text-decoration: none;"><button type="button" class="btn btn-success"><img src="/images/edit.png" style="width:1rem;"></button></a></td>
+         <td>in shipping</td>
+         {{else}}
+        <td> <a href="/cancelitempro?id={{productinfo.id}}" style="text-decoration: none;"><button type="button" class="btn btn-success"><img src="/images/edit.png" style="width:1rem;"></button></a></td>
+         <td>in progress</td>
+         {{/if}}
+        {{/if}}
+        
+    </tr>
+    {{/if}}
+   {{/each}}
+  </tbody>
+</table>
+</div>
