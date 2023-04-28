@@ -51,83 +51,25 @@ const dashboard = async (req, res) => {
       const fr=new Date(req.query.datefrom)
       const t=new Date(req.query.dateto)
       const sales = await orderdb.find({ is_complete: true, date: { $gte: fr, $lte: t } }).sort({ date: -1 });
-      const totalsales = await orderdb.find({ is_complete: true }).countDocuments()
-    
-      const totalcod = await orderdb.find({$and:[{ is_complete: true },{paymentmethod:"Cash On Delivery"}]}).countDocuments()
-      const totalonline = await orderdb.find({$and:[{ is_complete: true },{paymentmethod:"online payment"}]}).countDocuments()
-      const salestotal = sales.reduce((total, value) => {
-        return total + value.totalprice;
-      }, 0);
-      res.render("admin/admindashbord", {
-        adminheadlink: true,
-        adminheader: true,
-        admin,
-        sales,
-        salestotal,
-        userdata,
-        totalsales,
-        totalcod,
-        totalonline,
-        adminfooter: true,
-      });
+      res.json({status:true,sales})
     }
     else if(from){
       console.log("kerii fromik")
       const fr=new Date(req.query.datefrom)
-      console.log(fr)
+     
       const sales = await orderdb.find({ is_complete: true, date: { $gte: fr } }).sort({ date: -1 });
-      console.log(sales)
-      const totalsales = await orderdb.find({ is_complete: true }).countDocuments()
-    
-      const totalcod = await orderdb.find({$and:[{ is_complete: true },{paymentmethod:"Cash On Delivery"}]}).countDocuments()
-      const totalonline = await orderdb.find({$and:[{ is_complete: true },{paymentmethod:"online payment"}]}).countDocuments()
-      const salestotal = sales.reduce((total, value) => {
-        return total + value.totalprice;
-      }, 0);
-      res.render("admin/admindashbord", {
-        adminheadlink: true,
-        adminheader: true,
-        admin,
-        sales,
-        salestotal,
-        userdata,
-        totalsales,
-        totalcod,
-        totalonline,
-        adminfooter: true,
-      });
+      
+   
+      res.json({status:true,sales})
     }
     else if(to){
       console.log("kerii toik")
       const t=new Date(req.query.dateto)
       console.log(t)
       const sales = await orderdb.find({ is_complete: true, date: { $lte: t } }).sort({ date: -1 });
-      const totalsales = await orderdb.find({ is_complete: true }).countDocuments()
-    
-      const totalcod = await orderdb.find({$and:[{ is_complete: true },{paymentmethod:"Cash On Delivery"}]}).countDocuments()
-      const totalonline = await orderdb.find({$and:[{ is_complete: true },{paymentmethod:"online payment"}]}).countDocuments()
-      const salestotal = sales.reduce((total, value) => {
-        return total + value.totalprice;
-      }, 0);
-      res.render("admin/admindashbord", {
-        adminheadlink: true,
-        adminheader: true,
-        admin,
-        sales,
-        salestotal,
-        userdata,
-        totalsales,
-        totalcod,
-        totalonline,
-        adminfooter: true,
-      }, function(err, html) {
-          if (err) {
-              console.log(err);
-              return res.status(500).send('Error rendering view');
-          }
-          res.send(html);
-      }
-      );
+      
+      res.json({status:true,sales})
+   
       
     }
     else{

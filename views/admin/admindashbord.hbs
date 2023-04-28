@@ -226,16 +226,12 @@
                   <h5 class="card-title">Recent Sales <span>| Today</span></h5>
                   <button type="button" class="btn btn-danger btn-sm" style="margin-left: 4px;" onclick="downloadPDF()">Export to PDF</button>
                   <button type="button" class="btn btn-success btn-sm" style="margin-left: 4px;" onclick="downloadExcel()">Export excel</button>
-                 <form action="/admin/home">
-  <input type="date" name="date">
-  <button type="submit">Submit</button>
-</form>
+                
 
-                    <label >from</label>
+                    <label style="margin-left: 158px;">from</label>
                     <input type="date" name="from" id="from">
-                    <label >to</label>
+                    <label style="margin-left: 20px;">to</label>
                     <input type="date" name="to" id="to">
-                    <input type="submit" value="search">
                   
                   <table class="table table-borderless datatable" id="tabledata">
                     <thead>
@@ -651,19 +647,34 @@
  // Listen for the "change" event of the input element
 $('#from, #to').on('change', function() {
   // Get the selected date value
-   var startDate = $('#from').val();
+  var startDate = $('#from').val();
   var endDate = $('#to').val();
 
   // Send an AJAX request to the server
   $.ajax({
     url: '/admin/home?datefrom=' + encodeURIComponent(startDate) + '&dateto=' + encodeURIComponent(endDate),
     success: function(response) {
-      // Process the response from the server
-      var name = response.name;
-      console.log('Name:', name);
+      // Clear the table first
+      $('#tabledata tbody').empty();
+
+      // Loop through the sales data and append rows to the table
+      $.each(response.sales, function(index, sale) {
+        $('#tabledata tbody').append(`
+          <tr>
+            <th scope="row">${index + 1}</th>
+            <td>${sale._id}</td>
+            <td><a class="text-primary">${sale.address[0].firstname}</a></td>
+            <td>${sale.totalprice}</td>
+          </tr>
+        `);
+      });
+
+      // Update the total sales amount
+      $('#tabledata tfoot td:last-child').text(response.salestotal);
     }
   });
 });
+
 
  </script>
  
