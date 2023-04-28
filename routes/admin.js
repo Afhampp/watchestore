@@ -56,8 +56,9 @@ router.post('/addimage',productcontroller.addimage)
 router.get('/getbannerpage',bannercontroller.getbannertable)
 router.get('/geteditbanner',bannercontroller.geteditbanner)
 router.post('/posteditbanner',adminuploads.single('file'),bannercontroller.posteditbanner)
-router.get('/getaddbanner',bannercontroller.getaddbanner)
-router.post('/postaddbanner',adminuploads.single('file'),bannercontroller.postaddbanner)
+router.get('/viewbanner',bannercontroller.viewbanner)
+router.get('/cancelviewbanner',bannercontroller.cancelviewbanner)
+
 
 
 /* order */

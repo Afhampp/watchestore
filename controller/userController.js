@@ -311,7 +311,6 @@ const userhome = async (req, res) => {
     const banner1 = await bannerdb.findOne().limit(1);
     const banner2 = await bannerdb.findOne().skip(1).limit(1);
     const banner3 = await bannerdb.findOne().skip(2).limit(1);
-    const banner4 = await bannerdb.findOne().skip(3).limit(1);
     console.log(banner1.images);
     res.render("user/userhome", {
       userheadlink: true,
@@ -321,7 +320,6 @@ const userhome = async (req, res) => {
       banner1,
       banner2,
       banner3,
-      banner4,
       userfooter: true,
     });
   } catch (error) {

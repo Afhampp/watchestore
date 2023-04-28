@@ -6,22 +6,26 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">image</th>
-      <th scope="col">heading</th>
       <th scope="col">edit</th>
+      <th scope="col">view/unview</th>
+
     </tr>
   </thead>
   <tbody>
     {{#each getbanner}}
     <tr>
       <th >{{inc @index}}</th>
-      <td><img src="/images/uploads/{{images}}" alt="..." style="width: 71px;height: 74px;">
-      <td>{{heading}}</td>
-
-      <td><a href="/admin/geteditbanner?id={{_id}}" style="text-decoration: none;"><button type="button" class="btn btn-success">edit</button></a></td>
-     
+      <td><img src="/images/uploads/{{images}}" style="    height: 8rem; width: 9rem;"></td>
+      <td><a href="/admin/geteditbanner?id={{_id}}" style="text-decoration: none;"><button type="button" class="btn btn-primary">edit</button></a></td>
+      {{#if view}}
+       <td><a href="/admin/cancelviewbanner?id={{_id}}" style="text-decoration: none;"><button type="button" class="btn btn-danger">unview</button></a></td>
+      
+      {{else}}
+     <td><a href="/admin/viewbanner?id={{_id}}" style="text-decoration: none;"><button type="button" class="btn btn-success">view</button></a></td>
+      {{/if}}
     </tr>
    {{/each}}
   </tbody>
 </table>
-<a href="/admin/getaddbanner">add</a>
+
 </main>

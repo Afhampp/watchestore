@@ -6,6 +6,7 @@ const getbannertable=async(req,res)=>{
     try{
        
             const getbanner= await bannerdb.find()
+            console.log(getbanner)
             if(getbanner){
                 res.render('admin/adminbanner',{adminheadlink:true,adminheader:true,getbanner,adminfooter:true})            
             }
@@ -32,12 +33,12 @@ const posteditbanner=async(req,res)=>{
     try{
         console.log(req.file,req.body.heading)
           if(req.file) {
-            await bannerdb.findOneAndUpdate({_id:req.query.id},{$set:{heading:req.body.heading,images:req.file.filename}})
+            await bannerdb.findOneAndUpdate({_id:req.query.id},{$set:{view:true,images:req.file.filename}})
         res.redirect('/admin/getbannerpage')  
           }
           else{
-            await bannerdb.findOneAndUpdate({_id:req.query.id},{$set:{heading:req.body.heading}})
-        res.redirect('/admin/getbannerpage') 
+            await bannerdb.findOneAndUpdate({_id:req.query.id},{$set:{view:true}})
+            res.redirect('/admin/getbannerpage')  
           }
               
         
@@ -52,11 +53,25 @@ const posteditbanner=async(req,res)=>{
 
 
 
-const getaddbanner=async(req,res)=>{
+const viewbanner=async(req,res)=>{
     try{
-       
-          
-     res.render('admin/banneradd',{adminheadlink:true,adminheader:true,gadminfooter:true})            
+       const id=req.query.id
+        await  bannerdb.updateOne({_id:id},{$set:{view:true}})
+         res.redirect("/admin/getbannerpage")   
+        
+        
+        
+    }
+    catch(error){
+        console.log(error);
+        res.render("error");
+    }
+}
+const cancelviewbanner=async(req,res)=>{
+    try{
+       const id=req.query.id
+        await  bannerdb.updateOne({_id:id},{$set:{view:false}})
+         res.redirect("/admin/getbannerpage")   
         
         
         
@@ -84,8 +99,9 @@ const postaddbanner=async(req,res)=>{
 
 module.exports={
     getbannertable,
-    getaddbanner,
+    viewbanner,
     geteditbanner,
     postaddbanner,
-    posteditbanner
+    posteditbanner,
+    cancelviewbanner
 }

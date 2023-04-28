@@ -4,9 +4,10 @@ const bannerSchema=mongoose.Schema({
         type:String,
         required:true
     },
-    heading:{
-        type:String,
-        required:true
+    view:{
+        type:Boolean,
+        default:true
+       
     },
  
 })
