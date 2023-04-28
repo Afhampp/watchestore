@@ -311,7 +311,7 @@ const userhome = async (req, res) => {
     const banner1 = await bannerdb.findOne().limit(1);
     const banner2 = await bannerdb.findOne().skip(1).limit(1);
     const banner3 = await bannerdb.findOne().skip(2).limit(1);
-    console.log(banner1.images);
+   
     res.render("user/userhome", {
       userheadlink: true,
       userheader: true,
@@ -412,7 +412,7 @@ const productlist = async (req, res) => {
     if (req.query.page) {
       page = req.query.page;
     }
-    const limit = 2;
+    const limit = 6;
     const categerioslist = await categoriesdb.find();
     const catogeriesview = await productdb
       .find({
