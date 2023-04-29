@@ -75,6 +75,8 @@ router.get('/returnpro',userController.returnpro)
 /* coupen */
 router.post('/postcoupen',userController.postcoupen)
 
+/* contact */
+router.get('/contact',userController.getcontact)
 
 
 module.exports = router;

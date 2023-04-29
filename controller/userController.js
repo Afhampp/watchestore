@@ -1286,6 +1286,23 @@ const postcoupen = async (req, res) => {
   }
 };
 
+
+const getcontact =(req, res) => {
+  try {
+    const usersession=req.session.user_id
+
+    res.render('user/contact', {
+      userheadlink: true,
+      userheader: true,
+      usersession,
+      userfooter: true,
+    })
+  } catch (error) {
+    console.log(error);
+    res.render("error");
+  }
+};
+
 //--------------LOGOUT-----------------------------
 
 const logout = (req, res) => {
@@ -1338,4 +1355,5 @@ module.exports = {
   postcoupen,
   returnpro,
   resendotp,
+  getcontact
 };

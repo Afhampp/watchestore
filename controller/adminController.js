@@ -43,11 +43,9 @@ const dashboard = async (req, res) => {
     const id = req.session.admin_id;
     const from=req.query.datefrom
     const to=req.query.dateto
-    console.log(from,to)
     const userdata = await userdb.find().countDocuments();
     const admin = await admindb.findOne({ _id: id });
     if(from && to){
-      console.log("kerii")
       const fr=new Date(req.query.datefrom)
       const t=new Date(req.query.dateto)
       const sales = await orderdb.find({ is_complete: true, date: { $gte: fr, $lte: t } }).sort({ date: -1 });
