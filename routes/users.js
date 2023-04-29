@@ -8,9 +8,9 @@ var upload=require('../middleware/upload')
 
 /* GET users listing. */
 router.get('/',userController.userhome)
-router.get('/userlogin',userController.getuserlogin )
+router.get('/userlogin',auth.userlogged,userController.getuserlogin )
 router.post('/login',userController.postlogin)
-router.get('/signup',userController.getsignup)
+router.get('/signup',auth.userlogged,userController.getsignup)
 router.post('/signups',userController.postsignup)
 router.get('/userlogout',userController.logout)
 
@@ -22,8 +22,8 @@ router.post('/profilesubmit',upload.single('file'),userController.updateprofile)
 
 /* mailvarify */
 router.post('/verify',userController.otpverify)
-router.get('/getotp',userController.getotp)
-router.get('/resendotp',userController.resendotp)
+router.get('/getotp',auth.userlogged,userController.getotp)
+router.get('/resendotp',auth.userlogged,userController.resendotp)
 
 
 /* Forget Password */
