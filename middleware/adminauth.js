@@ -1,16 +1,16 @@
-const islogout=(req,res,next)=>{
+const adminlogged=(req,res,next)=>{
     try{
         if(req.session.admin_id){
+            next()   
             
-            res.redirect('/admin/home')
             
         }else{
+        res.redirect('/admin')
         
-        next()
     }
 }
     catch(error){
         console.log(error);
     }
 }
-module.exports={islogout}
+module.exports={adminlogged}

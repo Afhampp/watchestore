@@ -12,77 +12,77 @@ var router = express.Router();
 
 
 /* GET admin page. */
-router.get('/',nocache(),authadmin.islogout,adcontroller.getadminlogin)
+router.get('/',adcontroller.getadminlogin)
 router.post('/login',adcontroller.postadmin)
-router.get('/home',adcontroller.dashboard)
+router.get('/home',authadmin.adminlogged,adcontroller.dashboard)
 router.get('/logout',adcontroller.getlogout)
 
 
 
 /* GET viewuser page. */
-router.get('/table',adcontroller.tabledata)
-router.get('/block',adcontroller.blockuser)
-router.get('/unblock',adcontroller.unblockuser)
+router.get('/table',authadmin.adminlogged,adcontroller.tabledata)
+router.get('/block',authadmin.adminlogged,adcontroller.blockuser)
+router.get('/unblock',authadmin.adminlogged,adcontroller.unblockuser)
 
 
 
 /* categerios */
-router.get('/categories',categoriescontroller.getcategories)
-router.get('/addcategories',categoriescontroller.showadd)
+router.get('/categories',authadmin.adminlogged,categoriescontroller.getcategories)
+router.get('/addcategories',authadmin.adminlogged,categoriescontroller.showadd)
 router.post('/add',categoriescontroller.addcategories)
-router.get('/edit',categoriescontroller.editcat)
+router.get('/edit',authadmin.adminlogged,categoriescontroller.editcat)
 router.post('/updatecat',categoriescontroller.uploadcat)
-router.get('/list',categoriescontroller.list)
-router.get('/unlist',categoriescontroller.unlist)
+router.get('/list',authadmin.adminlogged,categoriescontroller.list)
+router.get('/unlist',authadmin.adminlogged,categoriescontroller.unlist)
 
 
 
 
 
 /* products */
-router.get('/addproduct',productcontroller.addproduct)
+router.get('/addproduct',authadmin.adminlogged,productcontroller.addproduct)
 router.post('/postproduct',adminuploads.array('file',4),productcontroller.postproduct)
-router.get('/showproduct',productcontroller.getproduct)
-router.get('/editpage',productcontroller.editproductpage)
+router.get('/showproduct',authadmin.adminlogged,productcontroller.getproduct)
+router.get('/editpage',authadmin.adminlogged,productcontroller.editproductpage)
 router.post('/editproduct',adminuploads.array('file',4),productcontroller.editproduct)
 router.delete('/deletepro',productcontroller.productdelete)
-router.get('/listpro',productcontroller.list)
-router.get('/unlistpro',productcontroller.unlist)
+router.get('/listpro',authadmin.adminlogged,productcontroller.list)
+router.get('/unlistpro',authadmin.adminlogged,productcontroller.unlist)
 router.delete('/deleteimage',productcontroller.imagedelete)
-router.post('/addimage',productcontroller.addimage)
+router.post('/addimage',authadmin.adminlogged,productcontroller.addimage)
 
 
 /* banner */
-router.get('/getbannerpage',bannercontroller.getbannertable)
-router.get('/geteditbanner',bannercontroller.geteditbanner)
+router.get('/getbannerpage',authadmin.adminlogged,bannercontroller.getbannertable)
+router.get('/geteditbanner',authadmin.adminlogged,bannercontroller.geteditbanner)
 router.post('/posteditbanner',adminuploads.single('file'),bannercontroller.posteditbanner)
-router.get('/viewbanner',bannercontroller.viewbanner)
-router.get('/cancelviewbanner',bannercontroller.cancelviewbanner)
+router.get('/viewbanner',authadmin.adminlogged,bannercontroller.viewbanner)
+router.get('/cancelviewbanner',authadmin.adminlogged,bannercontroller.cancelviewbanner)
 
 
 
 /* order */
-router.get('/getorderpage',ordercontroller.getorder)
-router.get('/view',ordercontroller.getorderitem)
-router.get('/cancel',ordercontroller.cancelled)
-router.get('/cancelitem',ordercontroller.cancelleditem)
-router.get('/complete',ordercontroller.complete)
-router.get('/shipping',ordercontroller.shipping)
-router.get('/accept',ordercontroller.accpetreturn)
-router.get('/decline',ordercontroller.decline)
+router.get('/getorderpage',authadmin.adminlogged,ordercontroller.getorder)
+router.get('/view',authadmin.adminlogged,ordercontroller.getorderitem)
+router.get('/cancel',authadmin.adminlogged,ordercontroller.cancelled)
+router.get('/cancelitem',authadmin.adminlogged,ordercontroller.cancelleditem)
+router.get('/complete',authadmin.adminlogged,ordercontroller.complete)
+router.get('/shipping',authadmin.adminlogged,ordercontroller.shipping)
+router.get('/accept',authadmin.adminlogged,ordercontroller.accpetreturn)
+router.get('/decline',authadmin.adminlogged,ordercontroller.decline)
 
 
 
 
 /* coupen */
-router.get('/getcoupen',coupeanController.coupenpage)
-router.get('/addcoupen',coupeanController.getaddpage)
+router.get('/getcoupen',authadmin.adminlogged,coupeanController.coupenpage)
+router.get('/addcoupen',authadmin.adminlogged,coupeanController.getaddpage)
 router.post('/postcoupen',coupeanController.postcoupen)
-router.get('/active',coupeanController.activate)
-router.get('/deactive',coupeanController.deactivate)
-router.get('/editcoupen',coupeanController.geteditcoupen)
+router.get('/active',authadmin.adminlogged,coupeanController.activate)
+router.get('/deactive',authadmin.adminlogged,coupeanController.deactivate)
+router.get('/editcoupen',authadmin.adminlogged,coupeanController.geteditcoupen)
 router.post('/updatecoupen',coupeanController.updatecoupean)
-router.get('/deletecoupen',coupeanController.deletecoupen)
+router.get('/deletecoupen',authadmin.adminlogged,coupeanController.deletecoupen)
 
 
 
