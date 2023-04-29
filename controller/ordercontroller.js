@@ -73,9 +73,12 @@ const cancelled=async(req,res)=>{
             console.log("ith updated products",products);
         }
         const orders=await orderdb.findOne({_id:id})
-        const finduser=orders.user_id
-         const total=orders.totalprice
-         await userdb.updateOne({_id:finduser},{$inc:{wallet:total}})
+        if(orders.paymentmethod=="online payment"){
+            const finduser=orders.user_id
+            const total=orders.totalprice
+            await userdb.updateOne({_id:finduser},{$inc:{wallet:total}})
+        }
+       
         res.redirect('/admin/getorderpage')
     }
     catch(error){

@@ -979,7 +979,6 @@ const payment = async (req, res) => {
         const productlists = req.session.productlist;
         const cartid = req.session.cartid;
         const now = new Date();
-        now.setHours(0, 0, 0, 0);
 
         const order = {
           user_id: usersession,
@@ -1175,13 +1174,16 @@ const cancelledcomplete = async (req, res) => {
       );
     }
     const orderlist = await orderdb.findOne({ _id: id });
-    const finduser = orderlist.user_id;
-    const total = orderlist.totalprice;
-
-    const walletvalue = await userdb.findOneAndUpdate(
-      { _id: finduser },
-      { $inc: { wallet: total } }
-    );
+    if(orderlist.paymentmethod=="online payment"){
+      const finduser = orderlist.user_id;
+      const total = orderlist.totalprice;
+  
+      await userdb.findOneAndUpdate(
+        { _id: finduser },
+        { $inc: { wallet: total } }
+      );
+    }
+  
 
     res.redirect("/procancel");
   } catch (error) {
